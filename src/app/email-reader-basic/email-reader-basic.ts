@@ -2,11 +2,12 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Email } from '../interfaces/email';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Highlight } from '../directives/highlight';
 
 @Component({
   selector: 'app-email-reader-basic',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, Highlight],
   templateUrl: './email-reader-basic.html',
   styleUrl: './email-reader-basic.css',
 })
