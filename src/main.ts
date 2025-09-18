@@ -1,6 +1,11 @@
+/// <reference types="@angular/localize" />
+
 import { bootstrapApplication } from '@angular/platform-browser';
+import { importProvidersFrom } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { appConfig } from './app/app.config';
 import { App } from './app/app';
 
-bootstrapApplication(App, appConfig)
-  .catch((err) => console.error(err));
+bootstrapApplication(App, {
+  providers: [...(appConfig.providers || []), importProvidersFrom(FormsModule)],
+}).catch((err) => console.error(err));
