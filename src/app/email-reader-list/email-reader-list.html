@@ -1,4 +1,4 @@
-<h2>Email Reader List Example</h2>
+<h2>Assessment 1: Email Reader Form and List</h2>
 
 <form #emailForm="ngForm" (ngSubmit)="sendForm()">
   <div class="form-group">
@@ -91,26 +91,30 @@
   </div>
 </form>
 
-<h3>Form data:</h3>
-<p class="bg-info">
-  From: {{ email.from }} <br />
-  To: {{ email.to }} <br />
-  Subject: {{ email.subject }} <br />
-  Body: {{ email.body }}
-</p>
+<div class="mt-4">
+    <h3>Email Preview</h3>
+    <p> This is an up-to-date viewer of the email being composed, in order to showcase two-way data binding in Angular forms.</p>
+    <p><strong>From:</strong> {{ email.from }}</p>
+    <p><strong>To:</strong> {{ email.to }}</p>
+    <p><strong>Subject:</strong> {{ email.subject }}</p>
+    <p><strong>Body:</strong> {{ email.body }}</p>
+</div>
 
-<div *ngIf="sentEmails.length === 0" class="alert alert-info">The list of emails is empty.</div>
-<table *ngIf="sentEmails.length > 0" class="table table-bordered mt-3">
-  <thead>
-    <tr>
-      <th>To</th>
-      <th>Subject</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let mail of sentEmails">
-      <td>{{ mail.to }}</td>
-      <td>{{ mail.subject }}</td>
-    </tr>
-  </tbody>
-</table>
+<div class="mt-4">
+    <h3>Sent Emails:</h3>
+    <div *ngIf="sentEmails.length === 0" class="alert alert-info">The list of emails is empty.</div>
+    <table *ngIf="sentEmails.length > 0" class="table table-bordered mt-3">
+    <thead>
+        <tr>
+        <th>To</th>
+        <th>Subject</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let mail of sentEmails">
+        <td>{{ mail.to }}</td>
+        <td>{{ mail.subject }}</td>
+        </tr>
+    </tbody>
+    </table>
+</div>
