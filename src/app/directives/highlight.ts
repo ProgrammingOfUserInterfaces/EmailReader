@@ -2,7 +2,6 @@ import { Directive, ElementRef, HostListener } from '@angular/core';
 
 @Directive({
   selector: '[appHighlight]',
-  // Mark as standalone so it can be imported directly by standalone components
   standalone: true,
 })
 export class Highlight {

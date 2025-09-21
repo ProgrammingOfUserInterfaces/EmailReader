@@ -16,7 +16,7 @@
       [ngClass]="from.valid || from.pristine ? '' : 'bg-danger'"
       pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,4}$"
     />
-    <div class="alert alert-danger" *ngIf="from.touched && !from.valid">
+    <div class="alert alert-danger mt-1" *ngIf="from.touched && !from.valid">
       <div *ngIf="from.errors && from.errors['required']">Email is required.</div>
       <div *ngIf="from.errors && from.errors['pattern']">
         Email does not match the required pattern.
@@ -38,7 +38,7 @@
       [ngClass]="to.valid || to.pristine ? '' : 'bg-danger'"
       pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,4}$"
     />
-    <div class="alert alert-danger" *ngIf="to.touched && !to.valid">
+    <div class="alert alert-danger mt-1" *ngIf="to.touched && !to.valid">
       <div *ngIf="to.errors && to.errors['required']">Email is required.</div>
       <div *ngIf="to.errors && to.errors['pattern']">
         Email does not match the required pattern.
@@ -61,7 +61,7 @@
       placeholder="Subject"
       [ngClass]="subject.valid || subject.pristine ? '' : 'bg-danger'"
     />
-    <div class="alert alert-danger" *ngIf="subject.touched && !subject.valid">
+    <div class="alert alert-danger mt-1" *ngIf="subject.touched && !subject.valid">
       <div *ngIf="subject.errors?.['required']">Subject is required.</div>
       <div *ngIf="subject.errors?.['minlength']">Subject must be at least 10 characters.</div>
       <div *ngIf="subject.errors?.['maxlength']">Subject must be at most 50 characters.</div>
