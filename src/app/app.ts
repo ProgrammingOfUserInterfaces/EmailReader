@@ -1,11 +1,11 @@
 import { Component, NgModule, signal } from '@angular/core';
-import { EmailReaderBasicComponent } from './email-reader-basic/email-reader-basic';
+import { EmailReaderListComponent } from './email-reader-list/email-reader-list';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  // Highlight directive is used inside EmailReaderBasicComponent template, so only that component needs to import it.
-  imports: [EmailReaderBasicComponent],
+  // Highlight directive is used inside EmailReaderListComponent template, so only that component needs to import it.
+  imports: [EmailReaderListComponent],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })

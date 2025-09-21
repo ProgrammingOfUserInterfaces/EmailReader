@@ -5,13 +5,13 @@ import { CommonModule } from '@angular/common';
 import { Highlight } from '../directives/highlight';
 
 @Component({
-  selector: 'app-email-reader-basic',
+  selector: 'app-email-reader-list',
   standalone: true,
   imports: [CommonModule, FormsModule, Highlight],
-  templateUrl: './email-reader-basic.html',
-  styleUrl: './email-reader-basic.css',
+  templateUrl: './email-reader-list.html',
+  styleUrl: './email-reader-list.css',
 })
-export class EmailReaderBasicComponent implements OnInit {
+export class EmailReaderListComponent implements OnInit {
   email: Email = {
     from: '',
     to: '',
