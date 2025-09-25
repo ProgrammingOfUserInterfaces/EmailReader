@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EmailWithService } from './email-with-service';
+import { EmailFormComponent } from './email-form';
 
-describe('EmailWithService', () => {
-  let component: EmailWithService;
-  let fixture: ComponentFixture<EmailWithService>;
+describe('EmailFormComponent', () => {
+  let component: EmailFormComponent;
+  let fixture: ComponentFixture<EmailFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EmailWithService]
+      imports: [EmailFormComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(EmailWithService);
+    fixture = TestBed.createComponent(EmailFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -7,13 +7,13 @@ import { EmailService } from '../services/email-service';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-email-with-service',
+  selector: 'app-email-form',
   standalone: true,
   imports: [CommonModule, FormsModule, Highlight, RouterLink],
-  templateUrl: './email-with-service.html',
-  styleUrl: './email-with-service.css'
+  templateUrl: './email-form.html',
+  styleUrl: './email-form.css'
 })
-export class EmailWithService implements OnInit {
+export class EmailFormComponent implements OnInit {
   email: Email = { from: '', to: '', subject: '', body: '' };
   lastSubmittedEmail: Email | null = null;
   sentEmails: Email[] = [];
