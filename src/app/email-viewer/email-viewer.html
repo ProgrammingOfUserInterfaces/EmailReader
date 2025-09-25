@@ -1,0 +1,15 @@
+<h1> EMAIL-VIEWER COMPONENT </h1>
+<!-- Selected email detail -->
+<div class="mt-4" *ngIf="selectedEmail as sel; else notFound">
+  <h3>Selected Email Detail</h3>
+  <p><strong>From:</strong> {{ sel.from }}</p>
+  <p><strong>To:</strong> {{ sel.to }}</p>
+  <p><strong>Subject:</strong> {{ sel.subject }}</p>
+  <p><strong>Body:</strong> {{ sel.body || '(no body)' }}</p>
+  <button type="button" class="btn btn-secondary mt-3" (click)="goBack()">
+    Close
+  </button>
+</div>
+<ng-template #notFound>
+  <div class="alert alert-warning mt-4">Email not found (id: {{ id }})</div>
+</ng-template>

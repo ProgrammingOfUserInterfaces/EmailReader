@@ -6,11 +6,12 @@ import { Highlight } from '../directives/highlight';
 import { EmailService } from '../services/email-service';
 import { FilterTextPipe } from '../pipes/filter-text.pipe';
 import { FilterBodyPipe } from '../pipes/filter-body.pipe';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-email-with-service',
   standalone: true,
-  imports: [CommonModule, FormsModule, Highlight, FilterTextPipe, FilterBodyPipe],
+  imports: [CommonModule, FormsModule, Highlight, FilterTextPipe, FilterBodyPipe, RouterLink],
   templateUrl: './email-with-service.html',
   styleUrl: './email-with-service.css'
 })
@@ -20,32 +21,20 @@ export class EmailWithService implements OnInit {
   sentEmails: Email[] = [];
   filterText = '';
   onlyWithBody = false;
-  selectedEmail: Email | null = null;
   @ViewChild('emailForm') emailForm: any;
 
   constructor(private emailService: EmailService) {}
 
   ngOnInit(): void {
-    // load existing emails from the service (if any pre-populated)
     this.sentEmails = this.emailService.getEmails();
   }
 
   sendForm(): void {
     this.lastSubmittedEmail = { ...this.email };
-    console.log(this.email);
     window.alert('"The email [' + this.email.subject + '] has been sent to [' + this.email.to + ']"');
-
     this.emailService.addEmail({ ...this.email });
     this.sentEmails = this.emailService.getEmails();
     this.clear();
-  }
-
-  viewEmail(email: Email): void {
-    this.selectedEmail = email;
-  }
-
-  clearSelected(): void {
-    this.selectedEmail = null;
   }
 
   clear(): void {
