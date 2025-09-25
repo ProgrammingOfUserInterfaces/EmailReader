@@ -26,8 +26,9 @@
         <td>{{ mail.from }}</td>
         <td>{{ mail.to }}</td>
         <td>{{ mail.subject }}</td>
-        <td>
-          <a class="btn btn-sm btn-outline-primary" [routerLink]="['/email', i]">View</a>
+        <td class="d-flex gap-1">
+          <a class="btn btn-sm btn-outline-primary mr-1" [routerLink]="['/email', i]">View</a>
+          <button type="button" class="btn btn-sm btn-outline-danger" (click)="deleteEmail(i)">Delete</button>
         </td>
       </tr>
     </tbody>
