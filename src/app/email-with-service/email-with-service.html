@@ -91,30 +91,47 @@
   </div>
 </form>
 
+<hr />
 <div class="mt-4">
-    <h3>Email Preview</h3>
-    <p> This is an up-to-date viewer of the email being composed, in order to showcase two-way data binding in Angular forms.</p>
-    <p><strong>From:</strong> {{ email.from }}</p>
-    <p><strong>To:</strong> {{ email.to }}</p>
-    <p><strong>Subject:</strong> {{ email.subject }}</p>
-    <p><strong>Body:</strong> {{ email.body }}</p>
-</div>
+  <h3>Sent Emails:</h3>
 
-<div class="mt-4">
-    <h3>Sent Emails:</h3>
-    <div *ngIf="sentEmails.length === 0" class="alert alert-info">The list of emails is empty.</div>
-    <table *ngIf="sentEmails.length > 0" class="table table-bordered mt-3">
+  <!-- Filter controls -->
+  <div class="form-inline mb-2">
+    <input class="form-control mr-2" type="text" placeholder="Filter text..." [(ngModel)]="filterText" name="filterText" />
+    <label class="form-check-label ml-2">
+      <input class="form-check-input" type="checkbox" [(ngModel)]="onlyWithBody" name="onlyWithBody" />
+      Show only emails with body
+    </label>
+  </div>
+
+  <div *ngIf="(sentEmails | filterText:filterText | filterBody:onlyWithBody).length === 0" class="alert alert-info">No emails match the current filters.</div>
+
+  <table *ngIf="(sentEmails | filterText:filterText | filterBody:onlyWithBody).length > 0" class="table table-bordered mt-3">
     <thead>
-        <tr>
+      <tr>
+        <th>From</th>
         <th>To</th>
         <th>Subject</th>
-        </tr>
+        <th>Actions</th>
+      </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let mail of sentEmails">
+      <tr *ngFor="let mail of sentEmails | filterText:filterText | filterBody:onlyWithBody">
+        <td>{{ mail.from }}</td>
         <td>{{ mail.to }}</td>
         <td>{{ mail.subject }}</td>
-        </tr>
+        <td><button class="btn btn-sm btn-outline-primary" (click)="viewEmail(mail)">View</button></td>
+      </tr>
     </tbody>
-    </table>
+  </table>
+</div>
+
+<!-- Selected email detail -->
+<div class="mt-4" *ngIf="selectedEmail as sel">
+  <h3>Selected Email Detail</h3>
+  <p><strong>From:</strong> {{ sel.from }}</p>
+  <p><strong>To:</strong> {{ sel.to }}</p>
+  <p><strong>Subject:</strong> {{ sel.subject }}</p>
+  <p><strong>Body:</strong> {{ sel.body || '(no body)' }}</p>
+  <button class="btn btn-secondary btn-sm" (click)="clearSelected()">Close</button>
 </div>
