@@ -92,38 +92,7 @@
 </form>
 
 <hr />
-<div class="mt-4">
-  <h3>Sent Emails:</h3>
 
-  <!-- Filter controls -->
-  <div class="form-inline mb-2">
-    <input class="form-control mr-2" type="text" placeholder="Filter text..." [(ngModel)]="filterText" name="filterText" />
-    <label class="form-check-label ml-2">
-      <input class="form-check-input" type="checkbox" [(ngModel)]="onlyWithBody" name="onlyWithBody" />
-      Show only emails with body
-    </label>
-  </div>
 
-  <div *ngIf="(sentEmails | filterText:filterText | filterBody:onlyWithBody).length === 0" class="alert alert-info">No emails match the current filters.</div>
 
-  <table *ngIf="(sentEmails | filterText:filterText | filterBody:onlyWithBody).length > 0" class="table table-bordered mt-3">
-    <thead>
-      <tr>
-        <th>From</th>
-        <th>To</th>
-        <th>Subject</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let mail of sentEmails | filterText:filterText | filterBody:onlyWithBody; let i = index">
-        <td>{{ mail.from }}</td>
-        <td>{{ mail.to }}</td>
-        <td>{{ mail.subject }}</td>
-        <td>
-          <a class="btn btn-sm btn-outline-primary" [routerLink]="['/email', i]">View</a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+
