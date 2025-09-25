@@ -1,1 +1,120 @@
-<p>email-with-service works!</p>
+<h2>Exercise 3: Adding services and filters</h2>
+
+<form #emailForm="ngForm" (ngSubmit)="sendForm()">
+  <div class="form-group">
+    <label>From: </label>
+    <input
+      appHighlight
+      class="form-control"
+      type="text"
+      required
+      [(ngModel)]="email.from"
+      name="from"
+      #from="ngModel"
+      aria-label="from email"
+      placeholder="from@example.com"
+      [ngClass]="from.valid || from.pristine ? '' : 'bg-danger'"
+      pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,4}$"
+    />
+    <div class="alert alert-danger mt-1" *ngIf="from.touched && !from.valid">
+      <div *ngIf="from.errors && from.errors['required']">Email is required.</div>
+      <div *ngIf="from.errors && from.errors['pattern']">
+        Email does not match the required pattern.
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>To: </label>
+    <input
+      appHighlight
+      class="form-control"
+      type="text"
+      required
+      [(ngModel)]="email.to"
+      name="to"
+      #to="ngModel"
+      aria-label="to email"
+      placeholder="to@example.com"
+      [ngClass]="to.valid || to.pristine ? '' : 'bg-danger'"
+      pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,4}$"
+    />
+    <div class="alert alert-danger mt-1" *ngIf="to.touched && !to.valid">
+      <div *ngIf="to.errors && to.errors['required']">Email is required.</div>
+      <div *ngIf="to.errors && to.errors['pattern']">
+        Email does not match the required pattern.
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Subject: </label>
+    <input
+      appHighlight
+      class="form-control"
+      type="text"
+      required
+      minlength="10"
+      maxlength="50"
+      [(ngModel)]="email.subject"
+      name="subject"
+      #subject="ngModel"
+      aria-label="email subject"
+      placeholder="Subject"
+      [ngClass]="subject.valid || subject.pristine ? '' : 'bg-danger'"
+    />
+    <div class="alert alert-danger mt-1" *ngIf="subject.touched && !subject.valid">
+      <div *ngIf="subject.errors?.['required']">Subject is required.</div>
+      <div *ngIf="subject.errors?.['minlength']">Subject must be at least 10 characters.</div>
+      <div *ngIf="subject.errors?.['maxlength']">Subject must be at most 50 characters.</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Body: </label>
+    <textarea
+      appHighlight
+      class="form-control"
+      [(ngModel)]="email.body"
+      name="body"
+      #body="ngModel"
+      aria-label="email body"
+      placeholder="Write your message here"
+      [ngClass]=""
+    ></textarea>
+  </div>
+
+  <br />
+  <div class="text-right">
+    <button class="btn btn-primary btn-sm mr-1" type="submit" [disabled]="!emailForm.form.valid">
+      Send
+    </button>
+    &nbsp;
+    <button class="btn btn-primary btn-sm mr-1" type="button" (click)="clear()">Reset form</button>
+  </div>
+</form>
+
+<div class="mt-4">
+    <h3>Email Preview</h3>
+    <p> This is an up-to-date viewer of the email being composed, in order to showcase two-way data binding in Angular forms.</p>
+    <p><strong>From:</strong> {{ email.from }}</p>
+    <p><strong>To:</strong> {{ email.to }}</p>
+    <p><strong>Subject:</strong> {{ email.subject }}</p>
+    <p><strong>Body:</strong> {{ email.body }}</p>
+</div>
+
+<div class="mt-4">
+    <h3>Sent Emails:</h3>
+    <div *ngIf="sentEmails.length === 0" class="alert alert-info">The list of emails is empty.</div>
+    <table *ngIf="sentEmails.length > 0" class="table table-bordered mt-3">
+    <thead>
+        <tr>
+        <th>To</th>
+        <th>Subject</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let mail of sentEmails">
+        <td>{{ mail.to }}</td>
+        <td>{{ mail.subject }}</td>
+        </tr>
+    </tbody>
+    </table>
+</div>

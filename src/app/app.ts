@@ -1,5 +1,6 @@
 import { Component, NgModule, signal } from '@angular/core';
 import { EmailReaderListComponent } from './email-reader-list/email-reader-list';
+import { EmailWithService } from './email-with-service/email-with-service';
 
 // we discovered that standalone is now the default when creating new Angular applications using the latest versions of the CLI.
 // therefore, there is no need to use the @NgModule decorator in this file anymore.
@@ -8,7 +9,7 @@ import { EmailReaderListComponent } from './email-reader-list/email-reader-list'
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [EmailReaderListComponent],
+  imports: [EmailReaderListComponent, EmailWithService],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
