@@ -48,6 +48,14 @@ export class EmailService {
     this.emailsList.push(email);
   }
 
+  deleteEmail(index: number): boolean {
+    if (index >= 0 && index < this.emailsList.length) {
+      this.emailsList.splice(index, 1);
+      return true;
+    }
+    return false;
+  }
+
   // deletes all emails stored in the service
   clearEmails(): void {
     this.emailsList = [];

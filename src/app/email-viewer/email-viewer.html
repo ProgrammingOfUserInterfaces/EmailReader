@@ -1,0 +1,11 @@
+<h3>Email Details</h3>
+<div class="mt-4" *ngIf="selectedEmail as sel; else notFound">
+  <p><strong>From:</strong> {{ sel.from }}</p>
+  <p><strong>To:</strong> {{ sel.to }}</p>
+  <p><strong>Subject:</strong> {{ sel.subject }}</p>
+  <p><strong>Body:</strong> {{ sel.body || '(no body)' }}</p>
+</div>
+<ng-template #notFound>
+  <div class="alert alert-warning mt-4">Email not found (id: {{ id }})</div>
+</ng-template>
+<a class="btn btn-secondary mt-3" [routerLink]="['/']">Close</a>
