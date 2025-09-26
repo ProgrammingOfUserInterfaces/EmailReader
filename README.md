@@ -1,4 +1,4 @@
-# Basic Email Reader: Assesment 1
+# Basic Email Reader: Assesment 2
 
 ## Authors
 1. Osadici Darius-Bogdan

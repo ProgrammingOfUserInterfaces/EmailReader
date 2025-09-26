@@ -1,99 +1,105 @@
-<h2>New Email</h2>
+<div class="p-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">New Email</h2>
+    <a class="btn btn-outline-primary" [routerLink]="['/']">Go back to e-mail list</a>
+  </div>
 
-<a class="btn btn-sm btn-outline-primary" [routerLink]="['/']">Go back to e-mail list</a>
+  <div class="card">
+    <div class="card-body">
+      <form #emailForm="ngForm" (ngSubmit)="sendForm()">
+        <div class="mb-3">
+          <label class="form-label">From:</label>
+          <input
+            appHighlight
+            class="form-control"
+            type="text"
+            required
+            [(ngModel)]="email.from"
+            name="from"
+            #from="ngModel"
+            aria-label="from email"
+            placeholder="from@example.com"
+            [ngClass]="from.valid || from.pristine ? '' : 'bg-danger'"
+            pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,4}$"
+          />
+          <div class="alert alert-danger mt-1" *ngIf="from.touched && !from.valid">
+            <div *ngIf="from.errors && from.errors['required']">Email is required.</div>
+            <div *ngIf="from.errors && from.errors['pattern']">
+              Email does not match the required pattern.
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">To:</label>
+          <input
+            appHighlight
+            class="form-control"
+            type="text"
+            required
+            [(ngModel)]="email.to"
+            name="to"
+            #to="ngModel"
+            aria-label="to email"
+            placeholder="to@example.com"
+            [ngClass]="to.valid || to.pristine ? '' : 'bg-danger'"
+            pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,4}$"
+          />
+          <div class="alert alert-danger mt-1" *ngIf="to.touched && !to.valid">
+            <div *ngIf="to.errors && to.errors['required']">Email is required.</div>
+            <div *ngIf="to.errors && to.errors['pattern']">
+              Email does not match the required pattern.
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Subject:</label>
+          <input
+            appHighlight
+            class="form-control"
+            type="text"
+            required
+            minlength="10"
+            maxlength="50"
+            [(ngModel)]="email.subject"
+            name="subject"
+            #subject="ngModel"
+            aria-label="email subject"
+            placeholder="Subject"
+            [ngClass]="subject.valid || subject.pristine ? '' : 'bg-danger'"
+          />
+          <div class="alert alert-danger mt-1" *ngIf="subject.touched && !subject.valid">
+            <div *ngIf="subject.errors?.['required']">Subject is required.</div>
+            <div *ngIf="subject.errors?.['minlength']">Subject must be at least 10 characters.</div>
+            <div *ngIf="subject.errors?.['maxlength']">Subject must be at most 50 characters.</div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Body:</label>
+          <textarea
+            appHighlight
+            class="form-control"
+            rows="6"
+            [(ngModel)]="email.body"
+            name="body"
+            #body="ngModel"
+            aria-label="email body"
+            placeholder="Write your message here"
+            [ngClass]=""
+          ></textarea>
+        </div>
 
-<form #emailForm="ngForm" (ngSubmit)="sendForm()">
-  <div class="form-group">
-    <label>From: </label>
-    <input
-      appHighlight
-      class="form-control"
-      type="text"
-      required
-      [(ngModel)]="email.from"
-      name="from"
-      #from="ngModel"
-      aria-label="from email"
-      placeholder="from@example.com"
-      [ngClass]="from.valid || from.pristine ? '' : 'bg-danger'"
-      pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,4}$"
-    />
-    <div class="alert alert-danger mt-1" *ngIf="from.touched && !from.valid">
-      <div *ngIf="from.errors && from.errors['required']">Email is required.</div>
-      <div *ngIf="from.errors && from.errors['pattern']">
-        Email does not match the required pattern.
-      </div>
+        <div class="d-flex justify-content-end gap-2">
+          <button class="btn btn-outline-secondary" type="button" (click)="clear()">
+            Reset form
+          </button>
+          <button class="btn btn-primary" type="submit" [disabled]="!emailForm.form.valid">
+            Send Email
+          </button>
+        </div>
+      </form>
     </div>
   </div>
-  <div class="form-group">
-    <label>To: </label>
-    <input
-      appHighlight
-      class="form-control"
-      type="text"
-      required
-      [(ngModel)]="email.to"
-      name="to"
-      #to="ngModel"
-      aria-label="to email"
-      placeholder="to@example.com"
-      [ngClass]="to.valid || to.pristine ? '' : 'bg-danger'"
-      pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,4}$"
-    />
-    <div class="alert alert-danger mt-1" *ngIf="to.touched && !to.valid">
-      <div *ngIf="to.errors && to.errors['required']">Email is required.</div>
-      <div *ngIf="to.errors && to.errors['pattern']">
-        Email does not match the required pattern.
-      </div>
-    </div>
-  </div>
-  <div class="form-group">
-    <label>Subject: </label>
-    <input
-      appHighlight
-      class="form-control"
-      type="text"
-      required
-      minlength="10"
-      maxlength="50"
-      [(ngModel)]="email.subject"
-      name="subject"
-      #subject="ngModel"
-      aria-label="email subject"
-      placeholder="Subject"
-      [ngClass]="subject.valid || subject.pristine ? '' : 'bg-danger'"
-    />
-    <div class="alert alert-danger mt-1" *ngIf="subject.touched && !subject.valid">
-      <div *ngIf="subject.errors?.['required']">Subject is required.</div>
-      <div *ngIf="subject.errors?.['minlength']">Subject must be at least 10 characters.</div>
-      <div *ngIf="subject.errors?.['maxlength']">Subject must be at most 50 characters.</div>
-    </div>
-  </div>
-  <div class="form-group">
-    <label>Body: </label>
-    <textarea
-      appHighlight
-      class="form-control"
-      [(ngModel)]="email.body"
-      name="body"
-      #body="ngModel"
-      aria-label="email body"
-      placeholder="Write your message here"
-      [ngClass]=""
-    ></textarea>
-  </div>
-
-  <br />
-  <div class="text-right">
-    <button class="btn btn-primary btn-sm mr-1" type="submit" [disabled]="!emailForm.form.valid">
-      Send
-    </button>
-    &nbsp;
-    <button class="btn btn-primary btn-sm mr-1" type="button" (click)="clear()">Reset form</button>
-  </div>
-</form>
-
-<hr />
+</div>
 
 
 
