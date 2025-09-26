@@ -2,43 +2,55 @@
   <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
       <h3>Emails List</h3>
-      <p class="text-muted">Below is a list of all sent emails. You can filter the list using the controls provided.</p>
+      <p class="text-muted">
+        Below is a list of all sent emails. You can filter the list using the controls provided.
+      </p>
     </div>
     <div>
       <a class="btn btn-primary btn-lg" [routerLink]="['/new']">New Email</a>
     </div>
   </div>
 
-
-
-
   <!-- Filter controls -->
   <div class="card mb-4">
     <div class="card-body">
       <div class="row">
         <div class="col-md-6 mb-2">
-          <input class="form-control" type="text" placeholder="Filter text..." [(ngModel)]="filterText" name="filterText" />
+          <input
+            class="form-control"
+            type="text"
+            placeholder="Filter text..."
+            [(ngModel)]="filterText"
+            name="filterText"
+          />
         </div>
         <div class="col-md-6">
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="onlyWithBody" [(ngModel)]="onlyWithBody" name="onlyWithBody" />
-            <label class="form-check-label" for="onlyWithBody">
-              Show only emails with body
-            </label>
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="onlyWithBody"
+              [(ngModel)]="onlyWithBody"
+              name="onlyWithBody"
+            />
+            <label class="form-check-label" for="onlyWithBody"> Show only emails with body </label>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-
-
-
-  <div *ngIf="(sentEmails | filterText:filterText | filterBody:onlyWithBody).length === 0" class="alert alert-info">
+  <div
+    *ngIf="(sentEmails | filterText : filterText | filterBody : onlyWithBody).length === 0"
+    class="alert alert-info"
+  >
     No emails match the current filters.
   </div>
 
-  <div *ngIf="(sentEmails | filterText:filterText | filterBody:onlyWithBody).length > 0" class="card">
+  <div
+    *ngIf="(sentEmails | filterText : filterText | filterBody : onlyWithBody).length > 0"
+    class="card"
+  >
     <div class="table-responsive m-3">
       <table class="table table-striped mb-0">
         <thead>
@@ -50,13 +62,24 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let mail of sentEmails | filterText:filterText | filterBody:onlyWithBody; let i = index">
+          <tr
+            *ngFor="
+              let mail of sentEmails | filterText : filterText | filterBody : onlyWithBody;
+              let i = index
+            "
+          >
             <td>{{ mail.from }}</td>
             <td>{{ mail.to }}</td>
             <td>{{ mail.subject }}</td>
             <td>
               <a class="btn btn-sm btn-outline-primary me-1" [routerLink]="['/email', i]">View</a>
-              <button type="button" class="btn btn-sm btn-outline-danger" (click)="deleteEmail(i)">Delete</button>
+              <button
+                type="button"
+                class="btn btn-sm btn-outline-danger"
+                (click)="confirmDelete(i)"
+              >
+                Delete
+              </button>
             </td>
           </tr>
         </tbody>
